@@ -52,10 +52,13 @@ list.addEventListener('click', async (e) => {
 });
 
 // R4: refresh every 2 s while open; the next refresh waits for this one, so calls never overlap.
+// Re-render only when the list changed, so an unchanged board does not swap out a button mid-click.
 async function refresh() {
   try {
-    incidents = (await fetchIncidents()).incidents;
-    render();
+    const next = (await fetchIncidents()).incidents;
+    const changed = JSON.stringify(next) !== JSON.stringify(incidents);
+    incidents = next;
+    if (changed || loader?.isConnected) render();
   } catch (err) {
     console.error(err);
   }
