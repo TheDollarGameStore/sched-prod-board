@@ -1,0 +1,9 @@
+// Copies app/ to dist/ and stamps the build's git sha into index.html (R6).
+import { cpSync, readFileSync, writeFileSync } from 'node:fs';
+import { execSync } from 'node:child_process';
+
+const sha = process.env.GITHUB_SHA || execSync('git rev-parse HEAD').toString().trim();
+cpSync('app', 'dist', { recursive: true });
+const html = readFileSync('dist/index.html', 'utf8').replaceAll('__BUILD_SHA__', sha);
+writeFileSync('dist/index.html', html);
+console.log(`built dist/ at ${sha}`);
