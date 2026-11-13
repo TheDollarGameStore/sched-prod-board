@@ -15,3 +15,7 @@ footer { color: #777; font-size: 13px; }
 .ack { font: inherit; padding: 4px 12px; border: 1px solid #888; border-radius: 4px; background: #fff; cursor: pointer; }
 .ack:hover { background: #f0f0f0; }
 .acked { color: #1b7a3a; font-weight: 600; }
+/* The bar keeps its space when hidden, so it appearing never moves a row. */
+.new-bar { display: block; box-sizing: border-box; width: 100%; max-width: 960px; height: 36px; margin: 0 0 8px; font: inherit; font-weight: 600; color: #fff; background: #1f5fbf; border: 0; border-radius: 4px; cursor: pointer; visibility: hidden; }
+.new-bar.on { visibility: visible; }
+.new-bar:hover { background: #174a96; }
